@@ -1,8 +1,11 @@
-# Week4_Reproducible-Research_NOAA_Storm-Analysis
-NOAA Storm Database Analysis regarding Economy and Health Damages
+
+## NOAA Storm Database Analysis regarding Economy and Health Damages
+
 Dipti sunal
+
 18/06/2022
-Synopsis
+
+## Synopsis
 Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern.
 
 This analysis is mainly to address the questions including:
@@ -10,7 +13,8 @@ This analysis is mainly to address the questions including:
 2. Across the United States, which types of events have the greatest economic consequences? 
 Main steps including data processing, data cleansing, plotting and resulting.
 
-Data processing
+## Data processing
+ 
 Download datasets and load into R
 setwd(choose.dir())
 data.url <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
@@ -18,16 +22,17 @@ data.csv <- "repdata-data-StormData.csv"
 if(!(file.exists(data.csv)))
     download.file(data.url, destfile="repdata-data-StormData.csv")
 system.time(noaa.data <- read.csv(data.csv,head=T))
-##    user  system elapsed 
-##  154.83    0.84  156.78
+## Data Represented
+    user  system elapsed 
+     154.83    0.84  156.78
 Dataset exploration - to get a summary re the datasets and allocate the variable names properly
 
 str(noaa.data)
 
 ## 'data.frame':	902297 obs. of  37 variables:
-##  $ STATE__   : num  1 1 1 1 1 1 1 1 1 1 ...
-##  $ BGN_DATE  : Factor w/ 16335 levels "1/1/1966 0:00:00",..: 6523 6523 4242 11116 2224 2224 2260 383 3980 3980 ...
-##  $ BGN_TIME  : Factor w/ 3608 levels "00:00:00 AM",..: 272 287 2705 1683 2584 3186 242 1683 3186 3186 ...
+## $ STATE__   : num  1 1 1 1 1 1 1 1 1 1 ...
+## $ BGN_DATE  : Factor w/ 16335 levels "1/1/1966 0:00:00",..: 6523 6523 4242 11116 2224 2224 2260 383 3980 3980 ...
+## $ BGN_TIME  : Factor w/ 3608 levels "00:00:00 AM",..: 272 287 2705 1683 2584 3186 242 1683 3186 3186 ...
 ##  $ TIME_ZONE : Factor w/ 22 levels "ADT","AKS","AST",..: 7 7 7 7 7 7 7 7 7 7 ...
 ##  $ COUNTY    : num  97 3 57 89 43 77 9 123 125 57 ...
 ##  $ COUNTYNAME: Factor w/ 29601 levels "","5NM E OF MACKINAC BRIDGE TO PRESQUE ISLE LT MI",..: 13513 1873 4598 10592 4372 10094 1973 23873 24418 4598 ...
@@ -125,10 +130,12 @@ head(noaa.data,n=3)
 ## 2              2
 ## 3              3
 colnames(noaa.data)<-tolower(colnames(noaa.data))
+
 Subset dataset based on analysis requirement - remove unnecessary variables in order to make dataset smaller and transfer damage figures to numbers with identical unit
 # first step subsetting
 index.col <- c(1:2,7:8,21:28)
 noaa.sub <- subset(noaa.data, select=index.col)
+
 # calculate economic damage and health damage
 noaa.sub$healthdmg <- noaa.sub$fatalities + noaa.sub$injuries
 noaa.sub$cropmul[tolower(noaa.sub$cropdmgexp)=="k"]<-1000
@@ -154,6 +161,7 @@ for (i in 1:length(spec_char)){
     event.types <- gsub(spec_char[i],"",as.character(event.types))
     noaa.sub$evtype2 <- gsub(spec_char[i],"",as.character(noaa.sub$evtype2))
 }
+
 ## [1] " "
 ## [1] "/"
 ## [1] "_"
@@ -201,7 +209,7 @@ noaa.eco <- noaa.agg[,-c(4,5,6)]
 noaa.health <- head(arrange(noaa.health,desc(healthdmg)),n=10)
 noaa.eco <- head(arrange(noaa.eco,desc(ecodmg)),n=10)
 
-Results
+## Results
 Health Plots and Results
 library(ggplot2)
 g1 <- ggplot(noaa.health,aes(x=eventtype, y=fatalities))
