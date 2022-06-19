@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)file:///D:/Data%20Science/Week2_Reproducible%20Research/week%204/NOAA_storm%20Analysis.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>NOAA Storm Database Analysis regarding Economy and Health Damages</title>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>NOAA Storm Database Analysis regarding Economy and Health Damages</h2>
+
+<h4>Dipti Sunal</h4>
+
+<h4>18/06/2022</h4>
+
+<h3>Synopsis</h3>
+
+<p>Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern.</p>
+
+<p>This analysis is mainly to address the questions including: </p>
+
+<pre><code>1. Across the United States, which types of events are most harmful with respect to population health? 
+
+2. Across the United States, which types of events have the greatest economic consequences? 
+</code></pre>
+
+<p>Main steps including data processing, data cleansing, plotting and resulting.</p>
+
+<h3>Data processing</h3>
+
+<p>Download datasets and load into R</p>
+
+<pre><code class="r"><span class="identifier">setwd</span><span class="paren">(</span><span class="identifier">choose.dir</span><span class="paren">(</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">data.url</span> <span class="operator">&lt;-</span> <span class="string">"https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"</span>
+<span class="identifier">data.csv</span> <span class="operator">&lt;-</span> <span class="string">"repdata-data-StormData.csv"</span>
+<span class="keyword">if</span><span class="paren">(</span><span class="operator">!</span><span class="paren">(</span><span class="identifier">file.exists</span><span class="paren">(</span><span class="identifier">data.csv</span><span class="paren">)</span><span class="paren">)</span><span class="paren">)</span>
+    <span class="identifier">download.file</span><span class="paren">(</span><span class="identifier">data.url</span>, <span class="identifier">destfile</span><span class="operator">=</span><span class="string">"repdata-data-StormData.csv"</span><span class="paren">)</span>
+<span class="identifier">system.time</span><span class="paren">(</span><span class="identifier">noaa.data</span> <span class="operator">&lt;-</span> <span class="identifier">read.csv</span><span class="paren">(</span><span class="identifier">data.csv</span>,<span class="identifier">head</span><span class="operator">=</span><span class="literal">T</span><span class="paren">)</span><span class="paren">)</span>
+</code></pre>
+
+<pre><code>##    user  system elapsed 
+##  154.83    0.84  156.78
+</code></pre>
+
+<p>Dataset exploration - to get a summary re the datasets and allocate the variable names properly</p>
+
+<pre><code class="r"><span class="identifier">str</span><span class="paren">(</span><span class="identifier">noaa.data</span><span class="paren">)</span>
+</code></pre>
+
+<pre><code>## 'data.frame':    902297 obs. of  37 variables:
+##  $ STATE__   : num  1 1 1 1 1 1 1 1 1 1 ...
+##  $ BGN_DATE  : Factor w/ 16335 levels "1/1/1966 0:00:00",..: 6523 6523 4242 11116 2224 2224 2260 383 3980 3980 ...
+##  $ BGN_TIME  : Factor w/ 3608 levels "00:00:00 AM",..: 272 287 2705 1683 2584 3186 242 1683 3186 3186 ...
+##  $ TIME_ZONE : Factor w/ 22 levels "ADT","AKS","AST",..: 7 7 7 7 7 7 7 7 7 7 ...
+##  $ COUNTY    : num  97 3 57 89 43 77 9 123 125 57 ...
+##  $ COUNTYNAME: Factor w/ 29601 levels "","5NM E OF MACKINAC BRIDGE TO PRESQUE ISLE LT MI",..: 13513 1873 4598 10592 4372 10094 1973 23873 24418 4598 ...
+##  $ STATE     : Factor w/ 72 levels "AK","AL","AM",..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ EVTYPE    : Factor w/ 985 levels "   HIGH SURF ADVISORY",..: 834 834 834 834 834 834 834 834 834 834 ...
+##  $ BGN_RANGE : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ BGN_AZI   : Factor w/ 35 levels "","  N"," NW",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ BGN_LOCATI: Factor w/ 54429 levels "","- 1 N Albion",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ END_DATE  : Factor w/ 6663 levels "","1/1/1993 0:00:00",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ END_TIME  : Factor w/ 3647 levels ""," 0900CST",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ COUNTY_END: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ COUNTYENDN: logi  NA NA NA NA NA NA ...
+##  $ END_RANGE : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ END_AZI   : Factor w/ 24 levels "","E","ENE","ESE",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ END_LOCATI: Factor w/ 34506 levels "","- .5 NNW",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ LENGTH    : num  14 2 0.1 0 0 1.5 1.5 0 3.3 2.3 ...
+##  $ WIDTH     : num  100 150 123 100 150 177 33 33 100 100 ...
+##  $ F         : int  3 2 2 2 2 2 2 1 3 3 ...
+##  $ MAG       : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ FATALITIES: num  0 0 0 0 0 0 0 0 1 0 ...
+##  $ INJURIES  : num  15 0 2 2 2 6 1 0 14 0 ...
+##  $ PROPDMG   : num  25 2.5 25 2.5 2.5 2.5 2.5 2.5 25 25 ...
+##  $ PROPDMGEXP: Factor w/ 19 levels "","-","?","+",..: 17 17 17 17 17 17 17 17 17 17 ...
+##  $ CROPDMG   : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ CROPDMGEXP: Factor w/ 9 levels "","?","0","2",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ WFO       : Factor w/ 542 levels ""," CI","$AC",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ STATEOFFIC: Factor w/ 250 levels "","ALABAMA, Central",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ ZONENAMES : Factor w/ 25112 levels "","                                                                                                                               "| __truncated__,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ LATITUDE  : num  3040 3042 3340 3458 3412 ...
+##  $ LONGITUDE : num  8812 8755 8742 8626 8642 ...
+##  $ LATITUDE_E: num  3051 0 0 0 0 ...
+##  $ LONGITUDE_: num  8806 0 0 0 0 ...
+##  $ REMARKS   : Factor w/ 436781 levels "","-2 at Deer Park\n",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ REFNUM    : num  1 2 3 4 5 6 7 8 9 10 ...
+</code></pre>
+
+<pre><code class="r"><span class="identifier">head</span><span class="paren">(</span><span class="identifier">noaa.data</span>,<span class="identifier">n</span><span class="operator">=</span><span class="number">3</span><span class="paren">)</span>
+</code></pre>
+
+<pre><code>##   STATE__          BGN_DATE
+## 1       1 4/18/1950 0:00:00
+## 2       1 4/18/1950 0:00:00
+## 3       1 2/20/1951 0:00:00
+##   BGN_TIME TIME_ZONE COUNTY
+## 1     0130       CST     97
+## 2     0145       CST      3
+## 3     1600       CST     57
+##   COUNTYNAME STATE  EVTYPE
+## 1     MOBILE    AL TORNADO
+## 2    BALDWIN    AL TORNADO
+## 3    FAYETTE    AL TORNADO
+##   BGN_RANGE BGN_AZI
+## 1         0        
+## 2         0        
+## 3         0        
+##   BGN_LOCATI END_DATE
+## 1                    
+## 2                    
+## 3                    
+##   END_TIME COUNTY_END
+## 1                   0
+## 2                   0
+## 3                   0
+##   COUNTYENDN END_RANGE
+## 1         NA         0
+## 2         NA         0
+## 3         NA         0
+##   END_AZI END_LOCATI LENGTH
+## 1                      14.0
+## 2                       2.0
+## 3                       0.1
+##   WIDTH F MAG FATALITIES
+## 1   100 3   0          0
+## 2   150 2   0          0
+## 3   123 2   0          0
+##   INJURIES PROPDMG PROPDMGEXP
+## 1       15    25.0          K
+## 2        0     2.5          K
+## 3        2    25.0          K
+##   CROPDMG CROPDMGEXP WFO
+## 1       0               
+## 2       0               
+## 3       0               
+##   STATEOFFIC ZONENAMES
+## 1                     
+## 2                     
+## 3                     
+##   LATITUDE LONGITUDE
+## 1     3040      8812
+## 2     3042      8755
+## 3     3340      8742
+##   LATITUDE_E LONGITUDE_
+## 1       3051       8806
+## 2          0          0
+## 3          0          0
+##   REMARKS REFNUM
+## 1              1
+## 2              2
+## 3              3
+</code></pre>
+
+<pre><code class="r"><span class="identifier">colnames</span><span class="paren">(</span><span class="identifier">noaa.data</span><span class="paren">)</span><span class="operator">&lt;-</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">colnames</span><span class="paren">(</span><span class="identifier">noaa.data</span><span class="paren">)</span><span class="paren">)</span>
+</code></pre>
+
+<p>Subset dataset based on analysis requirement - remove unnecessary variables in order to make dataset smaller and transfer damage figures to numbers with identical unit</p>
+
+<pre><code class="r"><span class="comment"># first step subsetting</span>
+<span class="identifier">index.col</span> <span class="operator">&lt;-</span> <span class="identifier">c</span><span class="paren">(</span><span class="number">1</span><span class="operator">:</span><span class="number">2</span>,<span class="number">7</span><span class="operator">:</span><span class="number">8</span>,<span class="number">21</span><span class="operator">:</span><span class="number">28</span><span class="paren">)</span>
+<span class="identifier">noaa.sub</span> <span class="operator">&lt;-</span> <span class="identifier">subset</span><span class="paren">(</span><span class="identifier">noaa.data</span>, <span class="identifier">select</span><span class="operator">=</span><span class="identifier">index.col</span><span class="paren">)</span>
+<span class="comment"># calculate economic damage and health damage</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">healthdmg</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">fatalities</span> <span class="operator">+</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">injuries</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropmul</span><span class="paren">[</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropdmgexp</span><span class="paren">)</span><span class="operator">==</span><span class="string">"k"</span><span class="paren">]</span><span class="operator">&lt;-</span><span class="number">1000</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropmul</span><span class="paren">[</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropdmgexp</span><span class="paren">)</span><span class="operator">==</span><span class="string">"m"</span><span class="paren">]</span><span class="operator">&lt;-</span><span class="number">1000000</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropmul</span><span class="paren">[</span><span class="identifier">is.na</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropmul</span><span class="paren">)</span><span class="paren">]</span> <span class="operator">&lt;-</span> <span class="number">1</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propmul</span><span class="paren">[</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propdmgexp</span><span class="paren">)</span><span class="operator">==</span><span class="string">"k"</span><span class="paren">]</span><span class="operator">&lt;-</span><span class="number">1000</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propmul</span><span class="paren">[</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propdmgexp</span><span class="paren">)</span><span class="operator">==</span><span class="string">"m"</span><span class="paren">]</span><span class="operator">&lt;-</span><span class="number">1000000</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propmul</span><span class="paren">[</span><span class="identifier">is.na</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propmul</span><span class="paren">)</span><span class="paren">]</span> <span class="operator">&lt;-</span> <span class="number">1</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropdmg</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropdmg</span> <span class="operator">*</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropmul</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propdmg</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propdmg</span> <span class="operator">*</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propmul</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">ecodmg</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">cropdmg</span> <span class="operator">+</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">propdmg</span>
+<span class="comment"># second step subsetting</span>
+<span class="identifier">noaa.sub</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.sub</span><span class="paren">[</span>,<span class="operator">-</span><span class="identifier">c</span><span class="paren">(</span><span class="number">1</span><span class="operator">:</span><span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">10</span>,<span class="number">12</span>,<span class="number">14</span>,<span class="number">15</span><span class="paren">)</span><span class="paren">]</span>
+</code></pre>
+
+<p>Clean the inconsistencies in EVTYPE column - there is a significant percentage of event types are inconsistent such as “Avalanche” and “Avalanch”, we need to indentify these errors and clean the data as much as possible. 
+Data cleansing takes a lot of time and there are several steps in this section like first round cleasing and aggregation, second round cleasing and aggregation and mannual adjustments.</p>
+
+<pre><code class="r"><span class="identifier">event.types</span> <span class="operator">&lt;-</span> <span class="identifier">readLines</span><span class="paren">(</span><span class="string">"evtype.txt"</span><span class="paren">)</span>
+</code></pre>
+
+<pre><code>## Warning: incomplete final line found on 'evtype.txt'
+</code></pre>
+
+<pre><code class="r"><span class="identifier">event.types</span> <span class="operator">&lt;-</span> <span class="identifier">as.factor</span><span class="paren">(</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">event.types</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">evtype2</span> <span class="operator">&lt;-</span> <span class="identifier">as.factor</span><span class="paren">(</span><span class="identifier">tolower</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">evtype</span><span class="paren">)</span><span class="paren">)</span> <span class="comment">## create new column for testing</span>
+<span class="identifier">spec_char</span> <span class="operator">&lt;-</span> <span class="identifier">c</span><span class="paren">(</span><span class="string">" "</span>,<span class="string">"/"</span>,<span class="string">"_"</span>,<span class="string">","</span>,<span class="string">":"</span>,<span class="string">"&amp;"</span>,<span class="string">"-"</span><span class="paren">)</span>
+<span class="keyword">for</span> <span class="paren">(</span><span class="identifier">i</span> <span class="keyword">in</span> <span class="number">1</span><span class="operator">:</span><span class="identifier">length</span><span class="paren">(</span><span class="identifier">spec_char</span><span class="paren">)</span><span class="paren">)</span><span class="paren">{</span>
+    <span class="identifier">print</span><span class="paren">(</span><span class="identifier">spec_char</span><span class="paren">[</span><span class="identifier">i</span><span class="paren">]</span><span class="paren">)</span>
+    <span class="identifier">event.types</span> <span class="operator">&lt;-</span> <span class="identifier">gsub</span><span class="paren">(</span><span class="identifier">spec_char</span><span class="paren">[</span><span class="identifier">i</span><span class="paren">]</span>,<span class="string">""</span>,<span class="identifier">as.character</span><span class="paren">(</span><span class="identifier">event.types</span><span class="paren">)</span><span class="paren">)</span>
+    <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">evtype2</span> <span class="operator">&lt;-</span> <span class="identifier">gsub</span><span class="paren">(</span><span class="identifier">spec_char</span><span class="paren">[</span><span class="identifier">i</span><span class="paren">]</span>,<span class="string">""</span>,<span class="identifier">as.character</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">evtype2</span><span class="paren">)</span><span class="paren">)</span>
+<span class="paren">}</span>
+</code></pre>
+
+<pre><code>## [1] " "
+## [1] "/"
+## [1] "_"
+## [1] ","
+## [1] ":"
+## [1] "&amp;"
+## [1] "-"
+</code></pre>
+
+<pre><code class="r"><span class="comment">## Matching event types based on event.types</span>
+<span class="keyword">for</span> <span class="paren">(</span><span class="identifier">i</span> <span class="keyword">in</span> <span class="number">1</span><span class="operator">:</span><span class="identifier">length</span><span class="paren">(</span><span class="identifier">event.types</span><span class="paren">)</span><span class="paren">)</span><span class="paren">{</span>
+    <span class="identifier">index</span> <span class="operator">&lt;-</span> <span class="identifier">grepl</span><span class="paren">(</span><span class="identifier">pattern</span><span class="operator">=</span><span class="identifier">event.types</span><span class="paren">[</span><span class="identifier">i</span><span class="paren">]</span>,<span class="identifier">x</span><span class="operator">=</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">evtype2</span>, <span class="identifier">fixed</span><span class="operator">=</span><span class="literal">F</span><span class="paren">)</span>
+    <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">[</span><span class="identifier">index</span><span class="paren">]</span> <span class="operator">&lt;-</span> <span class="identifier">event.types</span><span class="paren">[</span><span class="identifier">i</span><span class="paren">]</span>
+<span class="paren">}</span>
+<span class="comment">## First aggregate to make datasets smaller for the efficiency of following cleansing steps</span>
+<span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">[</span><span class="identifier">is.na</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">)</span><span class="paren">]</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">evtype2</span><span class="paren">[</span><span class="identifier">is.na</span><span class="paren">(</span><span class="identifier">noaa.sub</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">)</span><span class="paren">]</span>
+<span class="keyword">library</span><span class="paren">(</span><span class="identifier">plyr</span><span class="paren">)</span>
+<span class="identifier">noaa.agg</span> <span class="operator">&lt;-</span> <span class="identifier">ddply</span><span class="paren">(</span><span class="identifier">noaa.sub</span>, .<span class="paren">(</span><span class="identifier">eventtype</span><span class="paren">)</span>, <span class="identifier">summarize</span>, <span class="identifier">propdmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">propdmg</span><span class="paren">)</span>,<span class="identifier">cropdmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">cropdmg</span><span class="paren">)</span>,
+                  <span class="identifier">fatalities</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">fatalities</span><span class="paren">)</span>,<span class="identifier">injuries</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">injuries</span><span class="paren">)</span>,<span class="identifier">healthdmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">healthdmg</span><span class="paren">)</span>,
+                  <span class="identifier">ecodmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">ecodmg</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">noaa.agg</span><span class="operator">$</span><span class="identifier">sum</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.agg</span><span class="paren">[</span>,<span class="number">6</span><span class="paren">]</span><span class="operator">+</span><span class="identifier">noaa.agg</span><span class="paren">[</span>,<span class="number">7</span><span class="paren">]</span>
+<span class="identifier">noaa.agg</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.agg</span><span class="paren">[</span><span class="operator">!</span><span class="paren">(</span><span class="identifier">noaa.agg</span><span class="operator">$</span><span class="identifier">sum</span><span class="operator">==</span><span class="number">0</span><span class="paren">)</span>,<span class="paren">]</span>
+<span class="identifier">noaa.agg</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.agg</span><span class="paren">[</span>,<span class="operator">-</span><span class="number">8</span><span class="paren">]</span>
+<span class="comment">## Mannual data cleansing</span>
+<span class="identifier">adj</span> <span class="operator">&lt;-</span> <span class="identifier">matrix</span><span class="paren">(</span><span class="identifier">c</span><span class="paren">(</span><span class="string">"tstm"</span>,<span class="string">"thunderstormwind"</span>,<span class="string">"thunder"</span>,<span class="string">"thunderstormwind"</span>,
+                <span class="string">"thuder"</span>,<span class="string">"thunderstormwind"</span>,<span class="string">"avalan"</span>,<span class="string">"avalanche"</span>,
+                <span class="string">"astronomical"</span>,<span class="string">"astronomicallowtide"</span>,<span class="string">"fog"</span>,<span class="string">"freezingfog"</span>,
+                <span class="string">"hurricane"</span>,<span class="string">"hurricane(typhoon)"</span>,<span class="string">"cold"</span>,<span class="string">"coldwindchill"</span>,
+                <span class="string">"torndao"</span>,<span class="string">"tornado"</span>,<span class="string">"thunerstormwinds"</span>,<span class="string">"thunderstormwind"</span>,
+                <span class="string">"thundeerstormwinds"</span>,<span class="string">"thunderstormwind"</span>,
+                <span class="string">"freeze"</span>,<span class="string">"frost/freeze"</span><span class="paren">)</span>, <span class="identifier">ncol</span><span class="operator">=</span><span class="number">2</span>,<span class="identifier">byrow</span> <span class="operator">=</span> <span class="literal">T</span><span class="paren">)</span>
+<span class="keyword">for</span> <span class="paren">(</span><span class="identifier">i</span> <span class="keyword">in</span> <span class="number">1</span><span class="operator">:</span><span class="identifier">length</span><span class="paren">(</span><span class="identifier">adj</span><span class="paren">[</span>,<span class="number">1</span><span class="paren">]</span><span class="paren">)</span><span class="paren">)</span><span class="paren">{</span>
+    <span class="keyword">for</span> <span class="paren">(</span><span class="identifier">j</span> <span class="keyword">in</span> <span class="number">1</span><span class="operator">:</span><span class="identifier">length</span><span class="paren">(</span><span class="identifier">noaa.agg</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">)</span><span class="paren">)</span><span class="paren">{</span>
+        <span class="keyword">if</span><span class="paren">(</span><span class="identifier">grepl</span><span class="paren">(</span><span class="identifier">adj</span><span class="paren">[</span><span class="identifier">i</span>,<span class="number">1</span><span class="paren">]</span>,<span class="identifier">noaa.agg</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">[</span><span class="identifier">j</span><span class="paren">]</span>,<span class="identifier">fixed</span><span class="operator">=</span><span class="literal">F</span><span class="paren">)</span><span class="paren">)</span>
+            <span class="identifier">noaa.agg</span><span class="operator">$</span><span class="identifier">eventtype</span><span class="paren">[</span><span class="identifier">j</span><span class="paren">]</span> <span class="operator">&lt;-</span> <span class="identifier">adj</span><span class="paren">[</span><span class="identifier">i</span>,<span class="number">2</span><span class="paren">]</span>
+    <span class="paren">}</span>
+<span class="paren">}</span>
+<span class="identifier">noaa.agg</span> <span class="operator">&lt;-</span> <span class="identifier">ddply</span><span class="paren">(</span><span class="identifier">noaa.agg</span>, .<span class="paren">(</span><span class="identifier">eventtype</span><span class="paren">)</span>, <span class="identifier">summarize</span>, <span class="identifier">propdmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">propdmg</span><span class="paren">)</span>,<span class="identifier">cropdmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">cropdmg</span><span class="paren">)</span>,
+                  <span class="identifier">fatalities</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">fatalities</span><span class="paren">)</span>,<span class="identifier">injuries</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">injuries</span><span class="paren">)</span>,<span class="identifier">healthdmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">healthdmg</span><span class="paren">)</span>,
+                  <span class="identifier">ecodmg</span><span class="operator">=</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">ecodmg</span><span class="paren">)</span><span class="paren">)</span>
+</code></pre>
+
+<p>Sort and subset datasets for different analysis - only 10 largest items are subsetted into dataset</p>
+
+<pre><code class="r"><span class="identifier">noaa.health</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.agg</span><span class="paren">[</span>,<span class="operator">-</span><span class="identifier">c</span><span class="paren">(</span><span class="number">2</span>,<span class="number">3</span>,<span class="number">7</span><span class="paren">)</span><span class="paren">]</span>
+<span class="identifier">noaa.eco</span> <span class="operator">&lt;-</span> <span class="identifier">noaa.agg</span><span class="paren">[</span>,<span class="operator">-</span><span class="identifier">c</span><span class="paren">(</span><span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span><span class="paren">)</span><span class="paren">]</span>
+<span class="identifier">noaa.health</span> <span class="operator">&lt;-</span> <span class="identifier">head</span><span class="paren">(</span><span class="identifier">arrange</span><span class="paren">(</span><span class="identifier">noaa.health</span>,<span class="identifier">desc</span><span class="paren">(</span><span class="identifier">healthdmg</span><span class="paren">)</span><span class="paren">)</span>,<span class="identifier">n</span><span class="operator">=</span><span class="number">10</span><span class="paren">)</span>
+<span class="identifier">noaa.eco</span> <span class="operator">&lt;-</span> <span class="identifier">head</span><span class="paren">(</span><span class="identifier">arrange</span><span class="paren">(</span><span class="identifier">noaa.eco</span>,<span class="identifier">desc</span><span class="paren">(</span><span class="identifier">ecodmg</span><span class="paren">)</span><span class="paren">)</span>,<span class="identifier">n</span><span class="operator">=</span><span class="number">10</span><span class="paren">)</span>
+</code></pre>
+
+<h3>Results</h3>
+
+<p>Health Plots and Results</p>
+
+<pre><code class="r"><span class="keyword">library</span><span class="paren">(</span><span class="identifier">ggplot2</span><span class="paren">)</span>
+<span class="identifier">g1</span> <span class="operator">&lt;-</span> <span class="identifier">ggplot</span><span class="paren">(</span><span class="identifier">noaa.health</span>,<span class="identifier">aes</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="identifier">eventtype</span>, <span class="identifier">y</span><span class="operator">=</span><span class="identifier">fatalities</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">g1</span> <span class="operator">+</span> <span class="identifier">geom_bar</span><span class="paren">(</span><span class="identifier">stat</span><span class="operator">=</span><span class="string">"identity"</span>, <span class="identifier">fill</span><span class="operator">=</span><span class="string">"red"</span>,<span class="identifier">alpha</span><span class="operator">=</span><span class="number">1</span>, <span class="identifier">colour</span><span class="operator">=</span><span class="string">"black"</span>,<span class="paren">)</span> <span class="operator">+</span> 
+<span class="identifier">labs</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="string">"Health damage"</span><span class="paren">)</span> <span class="operator">+</span> <span class="identifier">labs</span><span class="paren">(</span><span class="identifier">y</span><span class="operator">=</span><span class="string">"Event types"</span><span class="paren">)</span> <span class="operator">+</span> 
+<span class="identifier">labs</span><span class="paren">(</span><span class="identifier">title</span><span class="operator">=</span><span class="identifier">paste</span><span class="paren">(</span><span class="string">"Most Harmful Events to Population Health"</span>, <span class="string">"(Top 10)"</span>, <span class="identifier">sep</span><span class="operator">=</span><span class="string">"\n"</span><span class="paren">)</span><span class="paren">)</span><span class="operator">+</span>
+<span class="identifier">theme</span><span class="paren">(</span><span class="identifier">axis.text.x</span> <span class="operator">=</span> <span class="identifier">element_text</span><span class="paren">(</span><span class="identifier">angle</span> <span class="operator">=</span> <span class="number">90</span>, <span class="identifier">hjust</span> <span class="operator">=</span> <span class="number">1</span><span class="paren">)</span><span class="paren">)</span> <span class="operator">+</span> 
+<span class="identifier">geom_bar</span><span class="paren">(</span><span class="identifier">aes</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="identifier">eventtype</span>, <span class="identifier">y</span><span class="operator">=</span><span class="identifier">injuries</span><span class="paren">)</span>,<span class="identifier">stat</span><span class="operator">=</span><span class="string">"identity"</span>,<span class="identifier">fill</span><span class="operator">=</span><span class="string">"red"</span>,<span class="identifier">alpha</span><span class="operator">=</span><span class="number">0.3</span>, <span class="identifier">colour</span><span class="operator">=</span><span class="string">"black"</span><span class="paren">)</span> <span class="operator">+</span>
+<span class="identifier">geom_bar</span><span class="paren">(</span><span class="identifier">aes</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="identifier">eventtype</span>, <span class="identifier">y</span><span class="operator">=</span><span class="identifier">healthdmg</span><span class="paren">)</span>,<span class="identifier">stat</span><span class="operator">=</span><span class="string">"identity"</span>,<span class="identifier">fill</span><span class="operator">=</span><span class="string">"red"</span>,<span class="identifier">alpha</span><span class="operator">=</span><span class="number">0.3</span>, <span class="identifier">colour</span><span class="operator">=</span><span class="string">"black"</span><span class="paren">)</span>
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAGwCAMAAAD47faQAAABF1BMVEUAAAAAADoAAGYAOmYAOpAAZpAAZrY6AAA6ADo6AGY6OgA6Ojo6OpA6ZrY6kNtNAABmAABmADpmAGZmOgBmOjpmZgBmZmZmkJBmtv9/f39/f5V/f6t/lcF/q9aDAACQOgCQOjqQOmaQkGaQtpCQ27aQ29uQ2/+Vf3+VlcGVq9aVweurf3+rf5Wrf6urlZWrlcGrq9ar1v+2ZgC225C2/7a2///BlX/BlZXBlavBq8HBwdbB6//Wq3/Wq5XWq6vW68HW/9bW/+vW///bkDrbkJDb29vb/7bb/9vb///l5eXrwZXr/9br///toKDycHDy8vL5dnb/AAD/fHz/srL/tmb/1qv/25D/68H//7b//9b//9v//+v///+IC8n8AAAACXBIWXMAAAsSAAALEgHS3X78AAAZ/ElEQVR4nO2dC3/bRnbFYa9rx62rlbNtV3Tsyk1apavUcaysHbfWdhOpD0dxNq5X0uqB7/85igEIkbyiRIE+c3lm5vx/MmWR4MG5AA5nMHiwqoUQ0ahWbUCInFHAhIiIAiZERBQwISKigAkREQVMiIgoYEJERAETIiIKmBARUcCEiIgCJkREFDAhIqKACRERBUyIiChgQkREARMiIgqYEBFRwBz4bz/tj5nVku+NWV36KGAgTtZvv2x+nW22v6Y521zrpni41Twe37evTzisqrVerp24Ua0ClzSt9vw/+7dvXO26m03/3qk/L081x3nzQvu29avnUDoKGIiTh38dtrLjv7m0Gd48YDt3p+TGAbt+010YsPD2w1tzYzM1m3nvvTSVArYMChiIk4efh3js/7bZDM82q+rO2+aPqrq1Ff64203Rb6bH99pm5ezp59WtLz75vHn9MEyz0zRVvw/b6uHtlzZgbfaah7H0ycMv7l1ot7MJE3V/9nO/eHvIwPT7mvbwZGo2nZv2veHP2TnUs8577XEFJw//pX3b+m8vphWzKGAgTh7+86fNBvhP395/ebbZpGHnzttmAw4b8aUWrN26d8ILzbZ6fO9u0zW8Wx9/shUCdHJFwA67VLRa+3feth3SZhbh7/FswlRdlLq5T95+trnRP9m+b//2y6nZTNysdS3S1JS9TO98MvvuPRct2GRaMYsCBqLZ1nY26uO/bTbDti/VbINTW307xcz+VJ+843sbbQ7Cv3kBa9/TPd883Uo2gekn6wM2JvzZz717+7iL2D/ZPtH/nsyml2r+nJlyLH3hvJ99/57pLuLhlTuKRaOAgWi2tf21en+t2UAPw2d5s+GF/tTG3H2wsMWGTbp5NbRc4ZWrAtbv3TSv7bS9wcDadMDGswm0eRvPvXt7mLrpvPVPtrLh9/RsejdtwC6mnA5Y77yfff8eBWwhChiI8OH/4H+fbk0FrHl2p91RutRFrNa6dAwI2GG7e7Y/vXM16X7uXOyE2YD1PcyrAzZxc4OAXcy+e48CthAFDETY1p5+8eDtVBcxPN02ZCZg7TY8NGAn62H4pN+KTcD6QM3vItYX7ea8LuLEzdVdxAvnff92/B4FbCEKGIiwEe5Xa91QwGSQo8nP5YCF5++Fpu1ywMJ7w7G0y8P0+2Essh0Xafap7D5YUKmvGuRoX5gdupiazcSNGeSYE7B+9v17FLCFKGAg2gHvZjOfHsze6Q7y7tth+vF4/LyAhd7XrS/um0GOoBJGQ7qR+Ftbk016vxve73fC9ucN09fj94XB9/V/6F6cmk1/dGB/dph+XsD62ffv6T5V7ipgV6OAFYUOCXujgBWFAuaNAlYUCpg3CpgQEVHAhIiIAiZERBSw1NjZGJ+wdOVlXt3JgmFEfW3mghSxAhSwxNhvj6mNDyzPpUnWRndo+WQ9nE38QGe5rxAFLC1OPm0P516cuTFzlVfLfvWr34wPYHenNO1ceSGliI8ClhZdAzYOmL3Kq33pv7pzHNtstScWHupCrRWigCVFf15jFzB7Cu/FRBt1d959O5n2wlaJApYUfYq6gNmLUMYTmYD1F0iKVaCAJUXfGi0O2KSLeM3dbER0FLCkmG3BrusiTna/1IKtEgUsKWb3webdoKYeJ+pimF77YCtFAUuLmVHES1d5dcwcaNYo4mpRwNJibnN0/TnyOg62ShSwxNi/e/m5awOmMzlWigKWGPOGLK4LmPbAVgsiYD8OYuDkfmK0xlTlSrUGiilgHlq8YrTGcqny5gE7fbZX17ujR2+uflTAkhOjNZZLlTcO2NHos7366PG7a34UsPTEaI3lUuVNA3b+H+ev9+qD7dCQXfXYTDZquLoRFKJwrukitgF7EX5d9TieMObngaMYrTFVuVKtaPtgN2rBFLDExGiN5VLlsIBpHyw3MVpjuVQ5LGAaRcxNjNZYLlXePGA3JqZdRzFaY6pypVoKGKEWrxitsVyqVMA8tHjFaI3lUqUC5qHFK0ZrbIBYBSGCsXZqBcxBi1eM1tiQgP28iD8vnOJnBcxbjNaYqjQoYDi7jmK0xlSlQQHD2XUUozWmKg0KGM6uoxitMVVpUMBwdh3FaI2pSoMChrPrKEZrTFUaFDCcXUcxWmOq0qCA4ew6itEaU5UGBQxn11GM1piqNChgOLuOYrTGVKVBAcPZdRSjNaYqDQoYzq6jGK0xVWlQwHB2HcVojalKQ/VrAAqYtxitMVVpqP60iA8Lp/iTAuYtRmtMVRoUMJxdRzFaY6rSoIDh7DqK0RpTlQYFDGfXUYzWmKo0KGA4u45itMZUpUEBw9l1FKM1pioNChjOrqMYrTFVaSgtYL8MYuDkfmK0xlSloXq/iA8Lp3hfRTDWTo0P2KCA836E0hpTlYbSWrBB8+ddw7TGVKVBAcPZdRSjNaYqDQoYzq6jGK0xVWlQwHB2HcVojalKgwKGs+soRmtMVRoUMJxdRzFaY6rSoIDh7DqK0RpTlQYFDGfXUYzWmKo0KGA4u45itMZUpUEBw9l1FKM1pioNChjOrqMYrTFVaVDAcHYdxWiNqUqDAoaz6yhGa0xVGhQwnF1HMVpjqtKggOHsOorRGlOVBgUMZ9dRjNaYqjQoYDi7jmK0xlSlQQHD2XUUozWmKg0KGM6uoxitMVVpUMBwdh3FaI2pSoMChrPrKEZrTFUaFDCcXUcxWmOq0qCA4ew6itEaU5UGBQxn11GM1piqNChgOLuOYrTGVKVBAcPZdRSjNaYqDQoYzq6jGK0xVWnIKGAHo4btenc0evSmeWweZh4VsOTEaI2VGbCG839/d/5dCNPR43fmRwFLT4zWWLEB+8Ob+vTrL0dP6oPt+vTZ3vRj82po4RZKCIGk+gAAsXN0E6+LJjh60vz7bK8+eHHwoj5/vTf9OJ5kUMB5P0JpjalKQ1Yt2B/Gu1pH23NbMAUsMTFaY4UG7PT5uxCuumnBtA+WgxitsUID9pffhcfdMJSoUcQcxGiNFRqwmzBo/rxrmNaYqjQoYDi7jmK0xlSlQQHD2XUUozWmKg0KGM6uoxitMVVpUMBwdh3FaI2pSoMChrPrKEZrTFUaFDCcXUcxWmOq0qCA4ew6itEaU5UGBQxn11GM1piqNChgOLuOYrTGVKVBAcPZdRSjNaYqDQoYzq6jGK0xVWlQwHB2HcVojalKgwKGs+soRmtMVRoUMJxdRzFaY6rSoIDh7DqK0RpTlQYFDGfXUYzWmKo0KGA4u45itMZUpUEBw9l1FKM1pioNChjOrqMYrTFVaVDAcHYdxWiNqUqDAoaz6yhGa0xVGhQwnF1HMVpjqtKggOHsOorRGlOVBgUMZ9dRjNaYqjQoYDi7jmK0xlSlobSA/TKIgZP7idEaU5WG6v0iPiyc4n0VwVg7NT5ggwLO+xFKa0xVGkprwQbNn3cN0xpTlQYFDGfXUYzWmKo0KGA4u45itMZUpSHhgO3febtfVRsKWLZitMaKCNjJw63m5/j+SwUsVzFaY2UE7NOXTRumgGUsRmusiIDV+9WtrUN1ETMWozVWRsCWYtD8edcwrTFVaVDAcHYdxWiNqUpDwgE726zu/M/DLQUsWzFaY0UE7Gxz7fjB28M7bxWwXMVojRURsJNPXzYBax4VsFzFaI0VEbCuBdtXC5avGK2xIgIW9sGqamC+FLCUxGiNlRGwpRg0f941TGtMVRoUMJxdRzFaY6rSkHDA2i7iXQUsXzFaY0UE7GxzrXncH5iwQfPnXcO0xlSlId2AdQP0GqbPWIzWWBEB6xovtWAZi9EaKyJgJ+tVx+0hbdig+fOuYVpjqtKQbsCWY9D8edcwrTFVaVDAcHYdxWiNqUpDugE7WR86RK+AJSZGa6yIgNX1YVXdGni1igKWkhitsUICVncHmwfdNGDQ/HnXMK0xVWlIOWDH90ILNuxI2KD5865hWmOq0pBuwE7W7Zn0u6PRozfNY/Mw51EBS06M1lgZAbNncpx/F2J09Pjd3B8FLD0xWmMFBOziMPOkGTv9+svRk/pguz59tnf5sZlg1DC/4yhEJKoPABAHqG7ideavS/teR5/t1QcvDl7U56/3Lj+OJxoUcN6PUFpjqtKQagt2BUfb17RgClhiYrTGygzY0XbdtGDaB8tHjNZYmQELo4jb88YPNYqYqBitsSICpuvBshejNVZAwOaMIipguYnRGisgYMPbLgUsOTFaY0UEbDkGzZ93DdMaU5WGhAN2OPx6ZgUsKTFaY0UE7GR94HfvKWCpidEaKyNg2gfLXYzWWBEBq3fWFLC8xWiNFRGw8UC99sHyFaM1VkTAlmPQ/HnXMK0xVWlQwHB2HcVojalKQ8IB03c05y5Ga6yIgOk7mrMXozVWRMD0Hc3Zi9EaKyJg+o7m7MVojRURMH1Hc/ZitMbKCNhSDJo/7xqmNaYqDQoYzq6jGK0xVWlIN2CXbzyqgGUmRmusiIC1t87Wl6DnLEZrrJCABQ51LmK+YrTGCgmYWrDMxWiNFREw7YNlL0ZrrIiALceg+fOuYVpjqtKQasDCKVLHD97qvog5i9EaU8AUsBzEaI0pYFfyyyAGTu4nRmtMVRqq94v4sHCK91UEY+3U+IANCjjvRyitMVVpKK0FGzR/3jVMa0xVGpINWH9veh1ozleM1lgBAVuWQfPnXcO0xlSlQQHD2XUUozWmKg0KGM6uoxitMVVpUMBwdh3FaI2pSoMChrPrKEZrTFUaFDCcXUcxWmOq0qCA4ew6itEaU5UGBQxn11GM1piqNChgOLuOYrTGVKVBAcPZdRSjNaYqDQoYzq6jGK0xVWlQwHB2HcVojalKgwKGs+soRmtMVRoUMJxdRzFaY6rSoIDh7DqK0RpTlQYFDGfXUYzWmKo0KGA4u45itMZUpUEBw9l1FKM1pioNChjOrqMYrTFVaVDAcHYdxWiNqUqDAoaz6yhGa0xVGhQwnF1HMVpjqtKggOHsOorRGlOVBgUMZ9dRjNaYqjQoYDi7jmK0xlSlIaOAnb8ajR6/q3dHo0dvmsfmYeZRAUtOjNZYmQE7etJk6cX5dyFMR4/fmR8FLD0xWmNlBixw8OL06y9HT+qD7fr02d70Y/PiqGGxhBBAqg8AEDtHN/G6cIqmETv6bK+J2cGL+vz13vTjeIpBAef9CKU1pioNWbVgu0/GOdue24IpYImJ0RorM2Dnr1604QodRe2D5SBGa6zMgO2Gfazt8Gu71ihiDmK0xsoM2I0YNH/eNUxrTFUaFDCcXUcxWmOq0qCA4ew6itEaU5UGBQxn11GM1piqNChgOLuOYrTGVKVBAcPZdRSjNaYqDQoYzq6jGK0xVWlQwHB2HcVojalKgwKGs+soRmtMVRoUMJxdRzFaY6rSoIDh7DqK0RpTlQYFDGfXUYzWmKo0KGA4u45itMZUpUEBw9l1FKM1pioNChjOrqMYrTFVaVDAcHYdxWiNqUqDAoaz6yhGa0xVGhQwnF1HMVpjqtKggOHsOorRGlOVBgUMZ9dRjNaYqjQoYDi7jmK0xlSlQQHD2XUUozWmKg0KGM6uoxitMVVpUMBwdh3FaI2pSoMChrPrKEZrTFUaFDCcXUcxWmOq0lBawH4ZxMDJUWIVhAjGnMVojQ1Zl+8X8WHhFO9jrcsIARsU8JV96v28iD8vnOLnWJ96jmK0xtSCKWAKGIeYAoazCxNTwPBaCti8qRUwBSxxMQUMZxcmpoDhtRSweVNHDRhmrG5ANTeeUgHDaw1Z/MgNo+SALd5IF2/HClhEMdoOxIANQwHDLEdo7dWvAShgy4pBF78Cxhgw5pXiKEa723SD5a+AebcTCthKtRSweVPHDRhyOUJrp14pjmIKWOR1qYARrhRHMQUs8rpUwAhXiqOYAhZ5XSpghCvFUUwBi7wuFTDCleIopoBFXpcKGOFKcRQboIU8+0IBU8AUMAPy5BdswP4RgAKGrV0BG6yFPKiJDdj/AVDAsLUrYIO1kItMAVPAFDCDAjZ4kf2ogH2MMQVs6UWmgClgCphBARu8yH4sOGDMI0+OYgqYAhYnYMwrxVFMAYu8LhUwwpXiKKaARV6XChjhSoGJIU++UMAGL/526rgBQ+7pYLcW5EpBOkNqYYdyyggYdPnHDxi0dN6VAjB2sekBz5dQwJZYl8jljwvY7ujRGwXsY4zF2fSAxqDdEWzXhnVd4gJ29Phd81NuwICbC3HAgIsMu/ihYsB1iQvYwXZ9+myv+c+oYVoOQlFiSC1eMaQWsdhllg3Yi/r89d74jx8HkcMAdsJitMZyqRIUsL4FU8ASE6M1lkuVmIBdtQ8Gt+soRmtMVa5UazXHwa4YRYTbdRSjNaYqV6pFdaAZbtdRjNaYqlyplgJGqMUrRmsslyoVMA8tXjFaY7lUqYB5aPGK0RrLpUoFzEOLV4zWWC5VKmAeWrxitMZyqVIB89DiFaM1lkuVEQI2jNHiSVYjRmtMVa5U6+PEFLAoWrxitMYyrVIBi6LFK0ZrLNMqFbAoWrxitMYyrdI/YEIUhAImREQUMCEiknrATr8KNy0Yfba3eNKbqD1/N3WlNhPnr5oqL67A+0h2cUusFJZeZCsIGDYTSHZbY5jNGFvlUXv13dHoBUJsci06QqyrE2EMvGEcgWwFll9kK2nBQiMRGgsAp89/+grbgsFAVvnN+D//CakTo9LRVfkTJrPARdZmAvdRsvQiW0nAsLWzwlslsovYVfk9pk7kIsMu/pS6iDW29YYC3TuBVgl0hk19W+XuNlAMI1VyFxELdNP7/vlP3yyezh9oKP7wZvE0YoalF1n6AUOG4vTZD69/4BxFBLo6Be61FsLyiyz9LiI0FAdPDkZPMFLgXR3aUEB71TAxmqHqDAY5oKEAwjnAUYPHSrFj/kAx5IjkRwhlEDBWOI9Y1+DWEFoltCOM3MhK7iJCORo92YX1XaG9OtZFBq0SKsaxxNIf5MCOIv7xd5xNaxmNfoakHzDkZgcMGPYUE2zAcJ/t0CrBiwzK0ossgy4i8sQfjm7FPIDOCmkN8eerJLMPBlzDNMOxlwnWQCc4YOENGHKRQU8aKDdg5BwwJp/2HK4W1CLDnjRQchcRCXRrOX8Fu4KLd5FhPyiRi4zj+Gj6gxxIsEdN/w14yh/0PHPkZaXQ42DQRYZk+UWmCy5nQA6YhI9j2CcoMGDIy0rRR/uQiwzIRywytWATIiT/iPFAM/RUKTiwRQYdRUzpVKnT5z9Rr2EUIa+MH8dYoP1N5CIjGUVbRQu2y9tFLIOD7V3UaDi2v4lsdbCngi69yFYzTF9EC0Z6IUd7hAh1jT/xqfnYkySXXmTaB4sG7YUcp8/++K+gu9SggQ4yAVl+kSlg8YBuLUixXdxNNIjbaWg3aelFpoBFAjokSXxkg7edhnYRUxpFFKsGedUbtp1mvR1PahdcilWCvCgH27Ty3nlkaRSwaABvKl2DL1dhvawUCsfZmwpYNKA3lSa94BIMcmACe8nG0r1qBSwa0JtKh10dysOH0HYa2UXE3vRm6UZfAYsH8qbS0J2dg+3zV6gWDNpOQ8HefFMBEzcF/NmObKdpSeyCywJA3/TmK9xOU9voAPdOOL/8geTLFBWwVNjFnVLLO8hBe9VbShdciiX5y5d0sSC+OR1ySEgXXFKCvR1MaMEQXR7muw/Stq06VYoQ8FchM253zCdJkqCAxQN5lh7JLntkeKtM7CtkCwD72Q6+cJgU3iqL/grZIqA8iwMObZXLN6sKWAqc9reAZr3iN3d0uUrmHD0KF0odcd7rHgjwdjwkKGBpcP6KdO8ECvR2PDg+5siGAiZ4IL4dz7IoYIkAvcyfFujteIAs/71KClgalHEVMu0oYmC571VSwNKgkIDRnsS19PcqKWCJwHqWXhks/71KCpgQi1n6e5UUMEEE81DOct+rpIAlAvqrkCmh3dNc/nuVFLA0oNzs4NAGbHkUsDTgvIgDTn5DOQpYGvAOYItrUcCEiIgCJljI8v4DClgiFDGK2N0mmPh0qeEoYGlw+uz75z99s3i6tMF+YQMFClganD774fUP+Y8kahRRrIiDJwdLHuoUq0QBEyIiClgiIL9yiJf8hnIUsDTIcPd/DhlWqIClAfYrh1jJ8IQwBSwR8htfm0OGJ4QpYEJERAFLAeqvHBLXoYAJHtRFFCsiszP0ruE0rxPCFLA0yPCz/QoyGytVwAQP7cdIXieEKWBpUE4XMTMUsDQop4uYGQqYIELnIgoRj8wGOAIKWBoU0kXM7ytyFbB0yOwI0SV00xuxUjLsQOWPApYGGR4hmkM4GJHZJSsKmKBht+0i5vVV7wqY4CHDw+kKWCLkd4SoDBSwNNAAR6IoYImQ3xGiMlDAUiDLI0RloIAJEREFTIiIKGBCREQBEyIiCpgQEVHAhIiIAiZERBQwISKigHFzfP/lxePs093P1HNnmxuezsSNUMC4UcASRwHjZhKwk/XqdvP/43tVtdE88fvmz2/v/334I9C8+qvfbIxfPXv6eVWtHTb/+unb1/9uqxcRbihg3EwCtrNW79+tTx5uTZqv43tr9eGdt2G65tXDamP86tnm3SZYd8N/x8+0r9/aGosIPxQwbkID1HC7TcrJp23r0/yadBG7BIZXxl3E5r9nT7fq8C+8p3umff3p1pSI8EEB4+aiBWs6d1XVtEH1ToibDVj7uLMxfnUmYN30D962AetFhBcKGDeTgI1br/WNqS6ibcHGr04FbPxM34Kp9fJGAeNmZh+s2d9qM/XJlg3YeB9s/OpUwMbPTO2DjXfahA8KGDczo4ihc7dfheHCdiTj9reTgJ1ttqOI3avTXcTumfDuv3q61YsINxSwYrh0ME04oIAVQdPAqelaCQqYEBFRwISIiAImREQUMCEiooAJEREFTIiIKGBCREQBEyIi/w8JmB+cEWtJmAAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-6"> </p>
+
+<p>Economy Plots and Results</p>
+
+<pre><code class="r"><span class="identifier">g2</span> <span class="operator">&lt;-</span> <span class="identifier">ggplot</span><span class="paren">(</span><span class="identifier">noaa.eco</span>,<span class="identifier">aes</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="identifier">eventtype</span>, <span class="identifier">y</span><span class="operator">=</span><span class="identifier">propdmg</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">g2</span> <span class="operator">+</span> <span class="identifier">geom_bar</span><span class="paren">(</span><span class="identifier">stat</span><span class="operator">=</span><span class="string">"identity"</span>, <span class="identifier">fill</span><span class="operator">=</span><span class="string">"black"</span>,<span class="identifier">alpha</span><span class="operator">=</span><span class="number">0.5</span>, <span class="identifier">colour</span><span class="operator">=</span><span class="string">"black"</span>,<span class="paren">)</span> <span class="operator">+</span> 
+<span class="identifier">labs</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="string">"Health damage"</span><span class="paren">)</span> <span class="operator">+</span> <span class="identifier">labs</span><span class="paren">(</span><span class="identifier">y</span><span class="operator">=</span><span class="string">"Event types"</span><span class="paren">)</span> <span class="operator">+</span> 
+<span class="identifier">labs</span><span class="paren">(</span><span class="identifier">title</span><span class="operator">=</span><span class="identifier">paste</span><span class="paren">(</span><span class="string">"Most Harmful Events to Economy"</span>, <span class="string">"(Top 10)"</span>, <span class="identifier">sep</span><span class="operator">=</span><span class="string">"\n"</span><span class="paren">)</span><span class="paren">)</span><span class="operator">+</span>
+<span class="identifier">theme</span><span class="paren">(</span><span class="identifier">axis.text.x</span> <span class="operator">=</span> <span class="identifier">element_text</span><span class="paren">(</span><span class="identifier">angle</span> <span class="operator">=</span> <span class="number">90</span>, <span class="identifier">hjust</span> <span class="operator">=</span> <span class="number">1</span><span class="paren">)</span><span class="paren">)</span> <span class="operator">+</span> 
+<span class="identifier">geom_bar</span><span class="paren">(</span><span class="identifier">aes</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="identifier">eventtype</span>, <span class="identifier">y</span><span class="operator">=</span><span class="identifier">cropdmg</span><span class="paren">)</span>,<span class="identifier">stat</span><span class="operator">=</span><span class="string">"identity"</span>,<span class="identifier">fill</span><span class="operator">=</span><span class="string">"blue"</span>,<span class="identifier">alpha</span><span class="operator">=</span><span class="number">0.5</span>, <span class="identifier">colour</span><span class="operator">=</span><span class="string">"black"</span><span class="paren">)</span> <span class="operator">+</span>
+<span class="identifier">geom_bar</span><span class="paren">(</span><span class="identifier">aes</span><span class="paren">(</span><span class="identifier">x</span><span class="operator">=</span><span class="identifier">eventtype</span>, <span class="identifier">y</span><span class="operator">=</span><span class="identifier">ecodmg</span><span class="paren">)</span>,<span class="identifier">stat</span><span class="operator">=</span><span class="string">"identity"</span>,<span class="identifier">fill</span><span class="operator">=</span><span class="string">"blue"</span>,<span class="identifier">alpha</span><span class="operator">=</span><span class="number">0.5</span>, <span class="identifier">colour</span><span class="operator">=</span><span class="string">"black"</span><span class="paren">)</span>    
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-7"> </p>
+
+
+
+</body></html>
